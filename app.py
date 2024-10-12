@@ -67,11 +67,11 @@ def add_custom_css():
         </style>
         """, unsafe_allow_html=True)
 
-def auto_refresh():
-    """
-    Button to automatically refresh the page.
-    """
-    if st.button("Auto Refresh Page"):
+def reload_page_button():
+    if st.button("Reload Page"):
+        # Force reloading the leaderboard from CSV
+        leaderboard_df = load_leaderboard()
+        st.session_state['leaderboard'] = leaderboard_df
         st.experimental_rerun()
 
 def show_leaderboard():
@@ -132,7 +132,7 @@ def main():
     # Display user input section below the leaderboard
     user_input_section()
 
-    auto_refresh()
+    reload_page_button()
 
 if __name__ == "__main__":
     main()
