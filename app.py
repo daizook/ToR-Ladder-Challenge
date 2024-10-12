@@ -170,7 +170,7 @@ def credits():
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
-    st.write(f"Hi everyone! This month's tier is {TIER}")
+    st.write(f"(Made with love by Daizook) Hi everyone! This month's tier is {TIER}")
     
     # Display leaderboard first
     show_leaderboard()
