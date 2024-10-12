@@ -154,6 +154,18 @@ def instructions():
     """
     st.write(refresh_para_2)
 
+def credits():
+    st.header("✨ Credits")
+
+    credit_para = """
+    This web application was coded and designed by Daizook (Discord user: daizook). The open-source code is available here (https://github.com/daizook/ToR-Ladder-Challenge), and you are allowed to use this code 
+    if you want to launch your own ladder tournament. However, if you do, please give credit to Daizook in your site somewhere (and, of course, link his GitHub repository :]). ALSO: If your shit is bugging, don't 
+    hesitate to contact me and I'll try to see what dumb mistake I (Daizook) made. 'Kay, have fun! Road to top 10 starts now!!
+    """
+    st.write(credit_para)
+
+    st.image("images/logo.png", caption="Treasures of Ruin Discord: https://discord.gg/MQuHkH48")
+
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
@@ -166,6 +178,8 @@ def main():
     user_input_section()
 
     instructions()
+
+    credits()
 
 if __name__ == "__main__":
     main()
