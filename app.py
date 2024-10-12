@@ -45,6 +45,28 @@ def load_leaderboard():
     else:
         raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
+def add_custom_css():
+    st.markdown("""
+        <style>
+        /* Style for the leaderboard table */
+        .dataframe tbody tr:nth-child(even) {
+            background-color: #262730;
+        }
+        .dataframe tbody tr:nth-child(odd) {
+            background-color: #1C1E22;
+        }
+        .dataframe thead {
+            background-color: #1E90FF;
+            color: white;
+            font-weight: bold;
+        }
+        .stButton button {
+            background-color: #1E90FF !important;
+            color: white !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
 def show_leaderboard():
     # Add custom CSS for dark theme and table styles
     add_custom_css()
