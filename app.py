@@ -104,7 +104,7 @@ def user_input_section():
     """
     st.header("Enter Username")
 
-    username = st.text_input("Enter your username:")
+    username = st.text_input("Register with your Pokemon Showdown username! Please make sure you follow the tag format specified by Daizook! 😉 For example, if Daizook wants everyone to use the tag tor9uu, your username should be, for instance, tor9uu DaiBro. Good luck and have fun!! ")
     ELO, GXE = getELOGXE(showdownName=username, tier=TIER)
 
     # Refreshes leaderboard
@@ -134,8 +134,6 @@ def main():
     
     # Display user input section below the leaderboard
     user_input_section()
-
-    reload_page_button()
 
 if __name__ == "__main__":
     main()
