@@ -92,12 +92,6 @@ def user_page():
                 st.success(f"{username} added to the leaderboard!")
                 #st.experimental_rerun()
 
-def refresh():
-    """
-    function refreshes leaderboard such that leaderboard does not stay static
-    """
-    return None
-
 def main():
     st.sidebar.title(f"Treasures of Ruin Ladder Challenge - {TIER}")
     page = st.sidebar.selectbox("Select a page", ["Leaderboard", "Enter Username"])
