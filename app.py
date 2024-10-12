@@ -81,11 +81,11 @@ def show_leaderboard():
 
     st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
 
-leaderboard_df = load_leaderboard()
+leaderboard_df = refresh()
 
 #keeps tracks of users (hopefully)
 if 'leaderboard' not in st.session_state:
-    st.session_state['leaderboard'] = leaderboard_df
+    st.session_state['leaderboard'] = refresh()
 
 def user_page():
     """
