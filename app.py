@@ -69,7 +69,7 @@ def show_leaderboard():
         .applymap(lambda x: 'background-color: #ffffff', subset=pd.IndexSlice[leaderboard_df.index[1::2], :])
 
     # Display the styled leaderboard
-    st.dataframe(styled_leaderboard, use_container_width=True)
+    st.dataframe(styled_leaderboard)
 
 leaderboard_df = load_leaderboard()
 
