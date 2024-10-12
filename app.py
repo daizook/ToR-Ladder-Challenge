@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import os
+import numpy as np
 
 TIER = 'gen9uu'
 leaderboard_file = 'leaderboard.csv'
@@ -23,12 +24,13 @@ def getELOGXE(tier: str, showdownName: str):
     soup = BeautifulSoup(r.text)
     sample_text = soup.text.replace('\n', ' ')
     try:
-        ELO = float(sample_text[sample_text.find(tier) + len(tier) : sample_text.find(tier) + len(tier) + 4])
+        ELO = int(sample_text[sample_text.find(tier) + len(tier) : sample_text.find(tier) + len(tier) + 4])
     except ValueError:
         ELO = 1000
     
     try:
         GXE = float(sample_text[sample_text.find(tier) + len(tier) + 4 : sample_text.find(tier) + len(tier) + 8])
+        GXE = np.round(GXE, 1)
     except ValueError:
         GXE = 0
     
