@@ -3,3 +3,4 @@ pandas
 requests
 beautifulsoup4==4.8.2
 altair==4.2.2
+numpy
