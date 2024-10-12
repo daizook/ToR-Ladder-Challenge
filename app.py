@@ -49,16 +49,25 @@ def add_custom_css():
     st.markdown("""
         <style>
         /* Style for the leaderboard table */
-        .dataframe tbody tr:nth-child(even) {
-            background-color: #262730;
+        .dataframe {
+            width: 90% !important;  /* Make the table wider */
+            margin-left: auto;
+            margin-right: auto;
         }
-        .dataframe tbody tr:nth-child(odd) {
-            background-color: #1C1E22;
+        .dataframe th, .dataframe td {
+            text-align: center !important;  /* Center the text */
+            font-size: 18px !important;  /* Increase the font size */
         }
         .dataframe thead {
             background-color: #1E90FF;
             color: white;
             font-weight: bold;
+        }
+        .dataframe tbody tr:nth-child(even) {
+            background-color: #262730;
+        }
+        .dataframe tbody tr:nth-child(odd) {
+            background-color: #1C1E22;
         }
         .stButton button {
             background-color: #1E90FF !important;
