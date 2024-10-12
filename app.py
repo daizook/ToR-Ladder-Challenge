@@ -148,7 +148,7 @@ def instructions():
     """
     st.write(refresh_para)
     if st.button("ඞ Refresh Leaderboard"):
-        st.image("images/amoonguss.gif")
+        st.image("images/amoonguss_gen5.gif")
         st.write("Ha ha you got pranked. Use the button at the top. That's the real one.")
     refresh_para_2 = """
     and you can actually watch your ELO drop 200 points and your GXE fall to 50%! 
