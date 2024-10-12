@@ -119,8 +119,11 @@ def user_input_section():
                 leaderboard_df = pd.concat([leaderboard_df, new_entry], ignore_index=True)
                 save_leaderboard(leaderboard_df)  # Save to CSV
                 st.success(f"{username} added to the leaderboard!")
+                
+                leaderboard_df = load_leaderboard()
+                st.session_state['leaderboard'] = leaderboard_df
+                st.experimental_rerun()
 
-        st.experimental_rerun()
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
