@@ -46,13 +46,25 @@ def load_leaderboard():
         raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
 def show_leaderboard():
-    st.title("Leaderboard")
+    # Add custom CSS for dark theme and table styles
+    add_custom_css()
 
-    if st.button("Refresh Leaderboard"):
-        refresh()
+    # Title for the leaderboard
+    st.title("🏆 Leaderboard")
+    
+    # Add a button to refresh the leaderboard
+    if st.button("🔄 Refresh Leaderboard"):
+        refresh()  # Assuming you have this function to refresh the leaderboard
         st.success("Leaderboard refreshed with updated scores!")
 
-    st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
+    # Sort leaderboard by ELO in descending order and reset the index
+    leaderboard_df = st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True)
+
+    # Format the ELO column for better readability
+    leaderboard_df['ELO'] = leaderboard_df['ELO'].map('{:,.2f}'.format)
+
+    # Display the styled leaderboard
+    st.dataframe(leaderboard_df)
 
 leaderboard_df = load_leaderboard()
 
