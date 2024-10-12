@@ -141,6 +141,19 @@ def instructions():
     """
     st.write(sign_up_para)
 
+    st.subheader("Refreshing the leaderboard")
+    refresh_para = """
+    The "Refresh leaderboard" button is there so that anyone can see the current leaderboard rankings by the push of a button. For instance, if you're playing a few ladder games and you're tilted as fuck, you can 
+    go to this site, press:
+    """
+    st.write(refresh_para)
+    if st.button("🔄 Refresh Leaderboard"):
+        st.write("ඞ Ha ha you got pranked. Use the button at the top. That's the real one. ඞ")
+    refresh_para_2 = """
+    and you can actually watch your ELO drop 200 points and your GXE fall to 50%! 
+    """
+    st.write(refresh_para_2)
+
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
