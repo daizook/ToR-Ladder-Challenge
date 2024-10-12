@@ -68,25 +68,13 @@ def add_custom_css():
         """, unsafe_allow_html=True)
 
 def show_leaderboard():
-    # Add custom CSS for dark theme and table styles
-    add_custom_css()
-
-    # Title for the leaderboard
     st.title("🏆 Leaderboard")
-    
-    # Add a button to refresh the leaderboard
+
     if st.button("🔄 Refresh Leaderboard"):
-        refresh()  # Assuming you have this function to refresh the leaderboard
+        refresh()
         st.success("Leaderboard refreshed with updated scores!")
 
-    # Sort leaderboard by ELO in descending order and reset the index
-    leaderboard_df = st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True)
-
-    # Format the ELO column for better readability
-    leaderboard_df['ELO'] = leaderboard_df['ELO'].map('{:,.2f}'.format)
-
-    # Display the styled leaderboard
-    st.dataframe(leaderboard_df)
+    st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
 
 leaderboard_df = load_leaderboard()
 
