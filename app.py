@@ -2,8 +2,10 @@ import streamlit as st
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+import os
 
 TIER = 'gen9uu'
+leaderboard_file = 'leaderboard.csv'
 
 def getELOGXE(tier: str, showdownName: str):
     """
@@ -32,17 +34,18 @@ def getELOGXE(tier: str, showdownName: str):
     
     return ELO, GXE
 
-leaderboard_data = {
-    'Username': [],
-    'ELO': [],
-    'GXE' : []
-}
-
-leaderboard_df = pd.DataFrame(leaderboard_data)
-
 #keeps tracks of users (hopefully)
 if 'leaderboard' not in st.session_state:
     st.session_state['leaderboard'] = leaderboard_df
+
+def save_leaderboard(df):
+    df.to_csv(leaderboard_file, index=False)
+
+def load_leaderboard():
+    if os.path.exists(leaderboard_file):
+        return pd.read_csv(leaderboard_file)
+    else:
+        raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
 def show_leaderboard():
     """
@@ -50,6 +53,8 @@ def show_leaderboard():
     """
     st.title("Leaderboard")
     st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
+
+leaderboard_df = load_leaderboard()
 
 def user_page():
     """
@@ -68,7 +73,9 @@ def user_page():
                 st.warning(f"Username '{username}' already registered for ladder challenge. Please choose a different username.")
             else:
                 new_entry = pd.DataFrame({'Username': [username], 'ELO': [ELO], 'GXE' : [GXE]})
-                st.session_state['leaderboard'] = pd.concat([st.session_state['leaderboard'], new_entry], ignore_index=True)
+                global leaderboard_df
+                leaderboard_df = pd.concat([leaderboard_df, new_entry], ignore_index=True)
+                save_leaderboard(leaderboard_df)  # Save to CSV
                 st.success(f"{username} added to the leaderboard!")
 
 def main():
