@@ -43,11 +43,33 @@ def load_leaderboard():
     else:
         raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
+def refresh():
+    """
+    function refreshes leaderboard such that leaderboard does not stay static
+    """
+    leaderboard_df = load_leaderboard()
+
+    updated_data = {'Username' : [],
+                    'ELO' : [],
+                    'GXE' : []
+                    }
+    
+    for user in leaderboard_df['Username']:
+        ELO, GXE = getELOGXE(tier = TIER, showdownName = user)
+        updated_data['Username'].append(user)
+        updated_data['ELO'].append(ELO)
+        updated_data['GXE'].append(GXE)
+    
+    updated_leaderboard_df = pd.DataFrame(updated_data, index = False)
+    updated_leaderboard_df.to_csv('leaderboard.csv')
+
 def show_leaderboard():
-    """
-    Displays leaderboard
-    """
     st.title("Leaderboard")
+
+    if st.button("Refresh Leaderboard"):
+        st.session_state['leaderboard'] = refresh()
+        st.success("Leaderboard refreshed!")
+
     st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
 
 leaderboard_df = load_leaderboard()
