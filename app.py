@@ -46,13 +46,30 @@ def load_leaderboard():
         raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
 def show_leaderboard():
-    st.title("Leaderboard")
-
-    if st.button("Refresh Leaderboard"):
-        refresh()
+    # Title for the leaderboard
+    st.title("🏆 Leaderboard")
+    
+    # Add a button to refresh the leaderboard
+    if st.button("🔄 Refresh Leaderboard"):
+        refresh()  # Assuming you have this function to refresh the leaderboard
         st.success("Leaderboard refreshed with updated scores!")
 
-    st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
+    # Sort leaderboard by ELO in descending order and reset the index
+    leaderboard_df = st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True)
+
+    # Format the ELO column for better readability (optional, depends on your data)
+    leaderboard_df['ELO'] = leaderboard_df['ELO'].map('{:,.2f}'.format)
+
+    # Style the leaderboard with alternating row colors and bold headers
+    styled_leaderboard = leaderboard_df.style \
+        .set_table_styles(
+            [{'selector': 'thead th', 'props': [('font-weight', 'bold'), ('color', '#ffffff'), ('background-color', '#4CAF50')]}]
+        ) \
+        .applymap(lambda x: 'background-color: #f5f5f5', subset=pd.IndexSlice[leaderboard_df.index[::2], :]) \
+        .applymap(lambda x: 'background-color: #ffffff', subset=pd.IndexSlice[leaderboard_df.index[1::2], :])
+
+    # Display the styled leaderboard
+    st.dataframe(styled_leaderboard, use_container_width=True)
 
 leaderboard_df = load_leaderboard()
 
