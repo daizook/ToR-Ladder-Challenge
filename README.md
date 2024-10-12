@@ -1,6 +1,8 @@
 # ToR-Ladder-Challenge
 
-Made with love by Daizook! :)
+![logo](https://github.com/user-attachments/assets/d22b61ca-8801-4260-8ffe-c7485aa375e3)
+
+Made with love by [Daizook](github.com/daizook)! :)
 
 If you wish to use this application for your own local ladder challenge, follow these steps:
 ```bash
