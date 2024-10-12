@@ -102,7 +102,7 @@ def user_input_section():
     """
     Handles user inputs; allows them to enter their Showdown username.
     """
-    st.header("Registration")
+    st.header("✍️ Registration")
     st.write("Please make sure you follow the tag format specified by Daizook! 😉 For example, if Daizook wants everyone to use the tag tor9uu, your username should be, for instance, tor9uu DaiBro. Good luck and have fun!!")
 
     username = st.text_input("Register with your Pokemon Showdown username!")
