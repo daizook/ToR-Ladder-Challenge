@@ -66,6 +66,8 @@ def refresh():
         ELO, GXE = getELOGXE(tier = TIER, showdownName=username)
         st.session_state['leaderboard'].at[idx, 'ELO'] = ELO
         st.session_state['leaderboard'].at[idx, 'GXE'] = GXE
+    
+    st.experimental_rerun()
 
 def user_page():
     """
