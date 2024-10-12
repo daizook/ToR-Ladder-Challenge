@@ -125,6 +125,22 @@ def user_input_section():
                 st.session_state['leaderboard'] = leaderboard_df
                 st.experimental_rerun()
 
+def instructions():
+    st.header("📝 Instructions")
+    first_paragraph = """
+    Hey, welcome to the Treasures of Ruin ladder tournament! This is (what I consider) a pretty standard ladder tournament, in which the goal is to climb as far as you can up the ladder of some chosen tier
+    on Pokemon Showdown. This is a pretty fun way to, not only explore other tiers apart from motherfucking OU, but also become a better player, as you get familiar with what other Pokemon can do without frantically 
+    looking it up on Smogon during a game.
+    """
+    st.write(first_paragraph)
+
+    st.subheader("How to sign up")
+    sign_up_para = """
+    Go to ✍️ Registration, follow the username instructions there (Daizook will probably tell you the tag beforehand), and fill in the form given! Then, press the 'Add me to the leaderboard!' button, and you should 
+    be registered and good to go. Yes, I can't believe I have to write this shit.
+    """
+    st.write(sign_up_para)
+
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
@@ -135,6 +151,8 @@ def main():
     
     # Display user input section below the leaderboard
     user_input_section()
+
+    instructions()
 
 if __name__ == "__main__":
     main()
