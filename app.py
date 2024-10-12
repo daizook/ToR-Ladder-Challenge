@@ -165,7 +165,7 @@ def credits():
     """
     st.write(credit_para)
 
-    st.image("images/logo.png", caption="Treasures of Ruin Discord: https://discord.gg/MQuHkH48")
+    st.image("images/logo.png", caption="Treasures of Ruin Discord: https://discord.gg/MQuHkH48. Logo made by Viz, luv ya bud")
 
 
 def main():
