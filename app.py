@@ -43,49 +43,18 @@ def load_leaderboard():
     else:
         raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
-def refresh():
-    """
-    function refreshes leaderboard such that leaderboard does not stay static
-    """
-    leaderboard_df = load_leaderboard()
-
-    if len(leaderboard_df) == 0:
-        updated_data = {'Username' : [],
-                    'ELO' : [],
-                    'GXE' : []
-                    }
-        
-        updated_leaderboard_df = pd.DataFrame(updated_data)
-        updated_leaderboard_df.to_csv('leaderboard.csv', index = False)
-    else:
-        updated_data = {'Username' : [],
-                        'ELO' : [],
-                        'GXE' : []
-                        }
-        
-        for user in leaderboard_df['Username']:
-            ELO, GXE = getELOGXE(tier = TIER, showdownName = user)
-            updated_data['Username'].append(user)
-            updated_data['ELO'].append(ELO)
-            updated_data['GXE'].append(GXE)
-        
-        updated_leaderboard_df = pd.DataFrame(updated_data)
-        updated_leaderboard_df.to_csv('leaderboard.csv', index = False)
-
 def show_leaderboard():
+    """
+    Displays leaderboard
+    """
     st.title("Leaderboard")
-
-    if st.button("Refresh Leaderboard"):
-        st.session_state['leaderboard'] = refresh()
-        st.success("Leaderboard refreshed!")
-
     st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
 
-leaderboard_df = refresh()
+leaderboard_df = load_leaderboard()
 
 #keeps tracks of users (hopefully)
 if 'leaderboard' not in st.session_state:
-    st.session_state['leaderboard'] = refresh()
+    st.session_state['leaderboard'] = leaderboard_df
 
 def user_page():
     """
@@ -108,6 +77,12 @@ def user_page():
                 leaderboard_df = pd.concat([leaderboard_df, new_entry], ignore_index=True)
                 save_leaderboard(leaderboard_df)  # Save to CSV
                 st.success(f"{username} added to the leaderboard!")
+
+def refresh():
+    """
+    function refreshes leaderboard such that leaderboard does not stay static
+    """
+    return None
 
 def main():
     st.sidebar.title(f"Treasures of Ruin Ladder Challenge - {TIER}")
