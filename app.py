@@ -113,7 +113,7 @@ def user_input_section():
                 save_leaderboard(leaderboard_df)  # Save to CSV
                 st.success(f"{username} added to the leaderboard!")
 
-                st.experimental_rerun()
+        st.experimental_rerun()
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
