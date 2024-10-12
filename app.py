@@ -94,7 +94,8 @@ def user_input_section():
                 st.experimental_rerun()
 
 def main():
-    st.title(f"Treasures of Ruin Ladder Challenge - {TIER}")
+    st.title("Treasures of Ruin Ladder Challenge")
+    st.write(f"Hi everyone! This month's tier is {TIER}")
     
     # Display leaderboard first
     show_leaderboard()
