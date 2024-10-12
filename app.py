@@ -56,7 +56,7 @@ def add_custom_css():
         }
         .dataframe th, .dataframe td {
             text-align: center !important;  /* Center the text */
-            font-size: 18px !important;  /* Increase the font size */
+            font-size: 30px !important;  /* Increase the font size */
         }
         .dataframe thead {
             background-color: #1E90FF;
