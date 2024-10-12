@@ -46,10 +46,12 @@ def load_leaderboard():
         raise ValueError("Leaderboard does not exist!! Contact Daizook and tell his ass to debug this.")
 
 def show_leaderboard():
-    """
-    Displays leaderboard
-    """
     st.title("Leaderboard")
+
+    if st.button("Refresh Leaderboard"):
+        refresh()
+        st.success("Leaderboard refreshed with updated scores!")
+
     st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
 
 leaderboard_df = load_leaderboard()
@@ -57,6 +59,13 @@ leaderboard_df = load_leaderboard()
 #keeps tracks of users (hopefully)
 if 'leaderboard' not in st.session_state:
     st.session_state['leaderboard'] = leaderboard_df
+
+def refresh():
+    for idx, row in st.session_state['leaderboard'].iterrows():
+        username = row['Username']
+        ELO, GXE = getELOGXE(tier = TIER, showdownName=username)
+        st.session_state['leaderboard'].at[idx, 'ELO'] = ELO
+        st.session_state['leaderboard'].at[idx, 'GXE'] = GXE
 
 def user_page():
     """
