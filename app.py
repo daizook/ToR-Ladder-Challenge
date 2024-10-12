@@ -34,10 +34,6 @@ def getELOGXE(tier: str, showdownName: str):
     
     return ELO, GXE
 
-#keeps tracks of users (hopefully)
-if 'leaderboard' not in st.session_state:
-    st.session_state['leaderboard'] = leaderboard_df
-
 def save_leaderboard(df):
     df.to_csv(leaderboard_file, index=False)
 
@@ -55,6 +51,10 @@ def show_leaderboard():
     st.table(st.session_state['leaderboard'].sort_values(by='ELO', ascending=False).reset_index(drop=True))
 
 leaderboard_df = load_leaderboard()
+
+#keeps tracks of users (hopefully)
+if 'leaderboard' not in st.session_state:
+    st.session_state['leaderboard'] = leaderboard_df
 
 def user_page():
     """
