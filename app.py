@@ -90,6 +90,7 @@ def user_page():
                 leaderboard_df = pd.concat([leaderboard_df, new_entry], ignore_index=True)
                 save_leaderboard(leaderboard_df)  # Save to CSV
                 st.success(f"{username} added to the leaderboard!")
+                st.experimental_rerun()
 
 def refresh():
     """
