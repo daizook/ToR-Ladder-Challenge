@@ -147,8 +147,9 @@ def instructions():
     go to this site, press:
     """
     st.write(refresh_para)
-    if st.button("Refresh Leaderboard"):
-        st.write("ඞ Ha ha you got pranked. Use the button at the top. That's the real one. ඞ")
+    if st.button("ඞ Refresh Leaderboard"):
+        
+        st.write("Ha ha you got pranked. Use the button at the top. That's the real one.")
     refresh_para_2 = """
     and you can actually watch your ELO drop 200 points and your GXE fall to 50%! 
     """
