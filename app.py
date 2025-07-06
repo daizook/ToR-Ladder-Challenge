@@ -4,17 +4,30 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import numpy as np
+import json
 
 # ADMIN PANEL: tracking changes: 5th July, 2025
-#from dotenv import load_dotenv
-#load_dotenv()
 ADMIN_PASSWORD = st.secrets["ADMIN_PASSWORD"]
 
 if "admin_variable" not in st.session_state:
-    st.session_state.admin_variable = "Default Value"
+    st.session_state.admin_variable = "You shouldn't be seeing this.. Contact Daizook"
 
+TIER_FILE = "tier-config.json"
+
+def load_tier():
+    if os.path.exists(TIER_FILE):
+        with open(TIER_FILE, 'r') as f:
+            return json.load(f).get("TIER", "gen9uu")
+    return "gen9uu"
+
+def save_tier(tier):
+    with open(TIER_FILE, 'w') as f:
+        json.dump({"TIER": tier}, f)
+
+# initializing session state...
 if "TIER" not in st.session_state:
-    st.session_state["TIER"] = "gen9uu"  # Default value
+    st.session_state["TIER"] = load_tier()
+
 leaderboard_file = 'leaderboard.csv'
 
 def admin_panel():
@@ -29,9 +42,10 @@ def admin_panel():
             current_tier = st.session_state.get("TIER", "gen9uu")
             st.write(f"Current tier: `{current_tier}`")
 
-            new_tier = st.text_input("Set a new tier (e.g., gen9ou, gen9randombattle) - if you break this, just lmk lol -Daizook:", value=current_tier)
+            new_tier = st.text_input("Set a new tier (e.g., gen9ou, gen9randombattle) - if this breaks, lmk -Daizook:", value=current_tier)
             if st.button("Update tier"):
                 st.session_state["TIER"] = new_tier
+                save_tier(new_tier)  # Persist it!
                 st.success(f"Tier updated to: `{new_tier}`")
 
         elif password != "":
