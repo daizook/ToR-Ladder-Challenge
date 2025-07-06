@@ -21,6 +21,7 @@ def admin_panel():
     st.header("🛠️ Admin Panel")
 
     with st.expander("Admin Login"):
+        st.write("If you're not one of the ToR admins, get your ahhh outta here fam, stop tryna guess the password. -Daizook")
         password = st.text_input("Enter admin password", type="password")
         if password == ADMIN_PASSWORD:
             st.success("Access granted.")
