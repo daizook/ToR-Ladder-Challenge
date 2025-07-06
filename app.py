@@ -14,6 +14,14 @@ if "admin_variable" not in st.session_state:
 
 TIER_FILE = "tier-config.json"
 
+def reset_app():
+    """
+    Don't fucking use this -Daizook
+    """
+    for key in st.session_state.keys():
+        del st.session_state[key]
+    st.experimental_rerun()
+
 def load_tier():
     if os.path.exists(TIER_FILE):
         with open(TIER_FILE, 'r') as f:
@@ -48,8 +56,8 @@ def admin_panel():
                 save_tier(new_tier)  # Persist it!
                 st.success(f"Tier updated to: `{new_tier}`")
 
-            if st.button("Restart App - BEWARE, THIS WIPES LEADERBOARD"):
-                st.experimental_rerun()
+            if st.button("Wipe everything"):
+                reset_app()
 
         elif password != "":
             st.error("Incorrect password. You didn't have enough aura.")
