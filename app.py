@@ -29,7 +29,7 @@ def admin_panel():
             current_tier = st.session_state.get("TIER", "gen9uu")
             st.write(f"Current tier: `{current_tier}`")
 
-            new_tier = st.text_input("Set a new tier (e.g., gen9ou, gen9randombattle) - if you motherfuckers set it to some stupid shit, I'll be on your ass -Daizook:", value=current_tier)
+            new_tier = st.text_input("Set a new tier (e.g., gen9ou, gen9randombattle) - if you break this, just lmk lol -Daizook:", value=current_tier)
             if st.button("Update tier"):
                 st.session_state["TIER"] = new_tier
                 st.success(f"Tier updated to: `{new_tier}`")
