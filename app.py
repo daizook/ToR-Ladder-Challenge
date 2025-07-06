@@ -5,8 +5,36 @@ from bs4 import BeautifulSoup
 import os
 import numpy as np
 
-TIER = 'gen9uu'
+# ADMIN PANEL: tracking changes: 5th July, 2025
+from dotenv import load_dotenv
+load_dotenv()
+ADMIN_PASSWORD = st.secrets["ADMIN_PASSWORD"]
+
+if "admin_variable" not in st.session_state:
+    st.session_state.admin_variable = "Default Value"
+
+if "TIER" not in st.session_state:
+    st.session_state["TIER"] = "gen9uu"  # Default value
 leaderboard_file = 'leaderboard.csv'
+
+def admin_panel():
+    st.header("🛠️ Admin Panel")
+
+    with st.expander("Admin Login"):
+        password = st.text_input("Enter admin password", type="password")
+        if password == ADMIN_PASSWORD:
+            st.success("Access granted.")
+
+            current_tier = st.session_state.get("TIER", "gen9uu")
+            st.write(f"Current tier: `{current_tier}`")
+
+            new_tier = st.text_input("Set a new tier (e.g., gen9ou, gen9randombattle) - if you motherfuckers set it to some stupid shit, I'll be on your ass -Daizook:", value=current_tier)
+            if st.button("Update tier"):
+                st.session_state["TIER"] = new_tier
+                st.success(f"Tier updated to: `{new_tier}`")
+
+        elif password != "":
+            st.error("Incorrect password. You didn't have enough aura.")
 
 def getELOGXE(tier: str, showdownName: str):
     """
@@ -92,7 +120,7 @@ if 'leaderboard' not in st.session_state:
 def refresh():
     for idx, row in st.session_state['leaderboard'].iterrows():
         username = row['Username']
-        ELO, GXE = getELOGXE(tier = TIER, showdownName=username)
+        ELO, GXE = getELOGXE(tier = st.session_state["TIER"], showdownName=username)
         st.session_state['leaderboard'].at[idx, 'ELO'] = ELO
         st.session_state['leaderboard'].at[idx, 'GXE'] = GXE
     
@@ -106,7 +134,7 @@ def user_input_section():
     st.write("Please make sure you follow the tag format specified by Daizook! 😉 For example, if Daizook wants everyone to use the tag tor9uu, your username should be, for instance, tor9uu DaiBro. Good luck and have fun!!")
 
     username = st.text_input("Register with your Pokemon Showdown username!")
-    ELO, GXE = getELOGXE(showdownName=username, tier=TIER)
+    ELO, GXE = getELOGXE(showdownName=username, tier=st.session_state["TIER"])
 
     # Refreshes leaderboard
     if st.button("Add me to the leaderboard!"):
@@ -170,8 +198,8 @@ def credits():
 
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
-    st.write(f"(Made with love by Daizook) Hi everyone! This month's tier is {TIER}")
-    
+    st.write(f"(Made with love by Daizook) Hi everyone! This month's tier is {st.session_state['TIER']}")
+
     # Display leaderboard first
     show_leaderboard()
     
@@ -179,6 +207,8 @@ def main():
     user_input_section()
 
     instructions()
+
+    admin_panel()
 
     credits()
 
