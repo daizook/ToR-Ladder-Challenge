@@ -56,7 +56,7 @@ def admin_panel():
                 save_tier(new_tier)  # Persist it!
                 st.success(f"Tier updated to: `{new_tier}`")
 
-            if st.button("Wipe everything"):
+            if st.button("Wipe leaderboard (doesn't work rn)"):
                 reset_app()
 
         elif password != "":
