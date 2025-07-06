@@ -25,8 +25,8 @@ def reset_app():
 def load_tier():
     if os.path.exists(TIER_FILE):
         with open(TIER_FILE, 'r') as f:
-            return json.load(f).get("TIER", "gen9uu")
-    return "gen9uu"
+            return json.load(f).get("TIER", "gen9ru")
+    return "gen9ru"
 
 def save_tier(tier):
     with open(TIER_FILE, 'w') as f:
@@ -47,7 +47,7 @@ def admin_panel():
         if password == ADMIN_PASSWORD:
             st.success("Access granted.")
 
-            current_tier = st.session_state.get("TIER", "gen9uu")
+            current_tier = st.session_state.get("TIER", "gen9ru")
             st.write(f"Current tier: `{current_tier}`")
 
             new_tier = st.text_input("Set a new tier (e.g., gen9ou, gen9randombattle) - if this breaks, lmk -Daizook:", value=current_tier)
@@ -65,10 +65,10 @@ def admin_panel():
 def getELOGXE(tier: str, showdownName: str):
     """
     Returns ELO, GXE for any Pokemon Showdown username
-    tier -> example: gen9uu, gen9nationaldex, etc.
+    tier -> example: gen9ru, gen9nationaldex, etc.
     showdownURL example: uu5pi zook
 
-    usage of function: getELOGXE('gen9uu', 'uu5pi zook')
+    usage of function: getELOGXE('gen9ru', 'uu5pi zook')
     >> (1499.0, 79.1) -> (ELO, GXE)
     """
 
