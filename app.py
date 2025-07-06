@@ -48,6 +48,9 @@ def admin_panel():
                 save_tier(new_tier)  # Persist it!
                 st.success(f"Tier updated to: `{new_tier}`")
 
+            if st.button("Restart App - BEWARE, THIS WIPES LEADERBOARD"):
+                st.experimental_rerun()
+
         elif password != "":
             st.error("Incorrect password. You didn't have enough aura.")
 
