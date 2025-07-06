@@ -225,7 +225,7 @@ def credits():
 def main():
     st.title("Treasures of Ruin Ladder Challenge")
     st.write(f"(Made with love by Daizook) Hi everyone! This month's tier is {st.session_state['TIER']}")
-    st.write("If you see that everyone's ELO is 1000, don't worry, because Daizook's incompetent ass is debugging this shit... Just click 'Refresh leaderboard' for now for your scores to auto-update. Thanks! <3")
+    st.write("⚠️ If you see that everyone's ELO is 1000, don't worry, because Daizook's incompetent ass is debugging this shit... Just click 'Refresh leaderboard' for now for your scores to auto-update. Thanks! <3")
 
     # Display leaderboard first
     show_leaderboard()
