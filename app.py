@@ -6,8 +6,8 @@ import os
 import numpy as np
 
 # ADMIN PANEL: tracking changes: 5th July, 2025
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 ADMIN_PASSWORD = st.secrets["ADMIN_PASSWORD"]
 
 if "admin_variable" not in st.session_state:
